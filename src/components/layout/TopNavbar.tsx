@@ -35,7 +35,7 @@ export function TopNavbar({ activeItem = 'home' }: TopNavbarProps) {
           <img
             src={codebiteLogoUrl}
             alt="CodeBite logo"
-            className="h-[50px] w-[50px] object-contain"
+            className="h-12.5 w-12.5 object-contain"
           />
           <span className="font-sans text-2xl font-bold leading-7 tracking-[-0.02em] text-primary-700">
             CodeBite
