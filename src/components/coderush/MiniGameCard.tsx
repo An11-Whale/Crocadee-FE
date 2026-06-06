@@ -5,6 +5,7 @@ import type {
   MiniGame,
   MiniGameTemplate,
 } from '../../features/coderush/data/miniGames';
+import { Button } from '../ui/Button';
 
 interface MiniGameCardProps {
   game: MiniGame;
@@ -18,6 +19,7 @@ interface RewardItemProps {
 }
 
 const rearrangePlaceholderPattern = /^(\s*)\[\[(.+?)\]\]$/;
+const decorativeCircleColor = '#ffdad6';
 
 function getIconBadgeColor(template: MiniGameTemplate) {
   switch (template) {
@@ -59,20 +61,71 @@ function RewardItem({ iconUrl, label, textColor }: RewardItemProps) {
 }
 
 export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
-  const cardHeightClass = isFeatured ? 'min-h-[654px] h-full' : 'min-h-[520px]';
+  const hasFragmentOptions =
+    game.id === 'rearrange-code' && (game.fragmentOptions?.length ?? 0) > 0;
+  const hasChoiceOptions =
+    game.template === 'guess-output' && (game.choiceOptions?.length ?? 0) > 0;
+  const hasOptionPanel = hasFragmentOptions || hasChoiceOptions;
+  const hasRoomForComfortableSpacing = isFeatured && !hasOptionPanel;
+
+  const cardHeightClass = isFeatured ? 'h-full min-h-0' : 'min-h-[520px]';
+  const cardPaddingClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'p-[clamp(1.25rem,3.5vh,1.75rem)]'
+      : 'p-[clamp(1rem,2.6vh,1.5rem)]'
+    : 'p-7';
+  const iconWrapperClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'mb-[clamp(1.25rem,3.5vh,1.75rem)] h-[clamp(3rem,7vh,3.5625rem)] w-[clamp(3rem,7vh,3.5625rem)]'
+      : 'mb-[clamp(0.875rem,2.4vh,1.5rem)] h-[clamp(2.75rem,6.4vh,3.4375rem)] w-[clamp(2.75rem,6.4vh,3.4375rem)]'
+    : 'mb-7 h-14.25 w-14.25';
+  const introSpacingClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'mb-[clamp(1.25rem,3.5vh,1.75rem)]'
+      : 'mb-[clamp(0.875rem,2.4vh,1.5rem)]'
+    : 'mb-7';
+  const titleClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'text-[clamp(1.5rem,3.6vh,1.75rem)] leading-[1.2]'
+      : 'text-[clamp(1.375rem,3.1vh,1.75rem)] leading-[1.15]'
+    : 'text-[28px] leading-8.5';
+  const subtitleClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'mt-[clamp(0.5rem,1.5vh,0.75rem)] text-[clamp(0.9375rem,2vh,1rem)] leading-[1.6]'
+      : 'mt-[clamp(0.375rem,1.2vh,0.75rem)] text-[clamp(0.875rem,1.9vh,1rem)] leading-[1.45]'
+    : 'mt-3 text-[16px] leading-[25.5px]';
+  const codePanelClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'flex min-h-0 flex-1 flex-col p-[clamp(1rem,2.7vh,1.3125rem)]'
+      : 'flex min-h-0 flex-1 flex-col p-[clamp(0.875rem,2.35vh,1.25rem)]'
+    : 'p-5.25';
+  const codePreClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'mt-[clamp(0.625rem,1.8vh,0.875rem)] min-h-0 text-[clamp(0.875rem,2vh,0.96875rem)] leading-[clamp(1.4rem,3.35vh,1.75rem)]'
+      : 'mt-[clamp(0.5rem,1.4vh,0.875rem)] min-h-0 text-[clamp(0.8125rem,1.9vh,0.96875rem)] leading-[clamp(1.2rem,2.9vh,1.55rem)]'
+    : 'mt-3.5 text-[15.5px] leading-7';
+  const optionPanelClass = isFeatured
+    ? 'mt-[clamp(0.75rem,2.1vh,1.3125rem)] p-[clamp(0.875rem,2.35vh,1.25rem)]'
+    : 'mt-5.25 p-5';
+  const footerClass = isFeatured
+    ? hasRoomForComfortableSpacing
+      ? 'mt-auto flex flex-col gap-3 pt-[clamp(1rem,2.7vh,1.75rem)] sm:flex-row sm:items-center sm:justify-between'
+      : 'mt-auto flex flex-col gap-3 pt-[clamp(0.875rem,2.35vh,1.5rem)] sm:flex-row sm:items-center sm:justify-between'
+    : 'mt-auto flex flex-col gap-4 pt-7 sm:flex-row sm:items-center sm:justify-between';
 
   return (
     <article
-      className={`relative overflow-hidden rounded-[11px] border border-[#E2E8F8] bg-[#F9F9FF] p-7 shadow-[0px_4px_20px_rgba(15,23,42,0.05)] ${cardHeightClass}`}
+      className={`relative overflow-hidden rounded-[11px] border border-[#E2E8F8] bg-[#F9F9FF] shadow-[0px_4px_20px_rgba(15,23,42,0.05)] ${cardHeightClass} ${cardPaddingClass}`}
     >
       <span
-        className="pointer-events-none absolute -top-17.5 -right-17.5 h-71 w-71 rounded-full bg-[#FFDAD6]"
+        className="pointer-events-none absolute -top-17.5 -right-17.5 h-71 w-71 rounded-full"
+        style={{ backgroundColor: decorativeCircleColor }}
         aria-hidden="true"
       />
 
       <div className="relative z-10 flex h-full flex-col">
         <div
-          className="relative mb-7 flex h-14.25 w-14.25 items-center justify-center rounded-full"
+          className={`relative flex items-center justify-center rounded-full ${iconWrapperClass}`}
           style={{ backgroundColor: getIconBadgeColor(game.template) }}
         >
           <span
@@ -92,16 +145,18 @@ export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
           )}
         </div>
 
-        <div className="mb-7">
-          <h3 className="text-[28px] leading-8.5 font-bold text-[#151C27]">
+        <div className={introSpacingClass}>
+          <h3 className={`${titleClass} font-bold text-[#151C27]`}>
             {game.title}
           </h3>
-          <p className="mt-3 max-w-127.75 whitespace-pre-line text-[16px] leading-[25.5px] text-[#4A4455]">
+          <p
+            className={`${subtitleClass} max-w-127.75 whitespace-pre-line text-[#4A4455]`}
+          >
             {game.subtitle}
           </p>
         </div>
 
-        <div className="rounded-[7px] bg-[#1E1E1E] p-5.25">
+        <div className={`rounded-[7px] bg-[#1E1E1E] ${codePanelClass}`}>
           <div className="border-b border-[#374151] pb-1.75">
             <div className="flex items-start gap-3">
               <span className="font-mono text-[10.6px] leading-3.5 text-[#DCE2F3]">
@@ -118,7 +173,9 @@ export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
             </div>
           </div>
 
-          <pre className="mt-3.5 whitespace-pre-wrap font-mono text-[15.5px] leading-7 text-[#DCE2F3]">
+          <pre
+            className={`${codePreClass} whitespace-pre-wrap font-mono text-[#DCE2F3]`}
+          >
             {game.codeSnippet.split('\n').map((line, index) => {
               const isSpotIfLine =
                 game.template === 'spot-bug' &&
@@ -166,42 +223,40 @@ export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
         </div>
 
         {game.id === 'rearrange-code' && game.fragmentOptions?.length ? (
-          <div className="mt-5.25 rounded-[7px] bg-[#F9F9FF] p-5">
+          <div className={`rounded-[7px] bg-[#F9F9FF] ${optionPanelClass}`}>
             <div className="flex flex-wrap gap-3">
               {game.fragmentOptions.map((fragment) => (
-                <button
+                <Button
                   key={`${game.id}-${fragment}`}
-                  type="button"
-                  className="inline-flex min-h-11 cursor-grab items-center rounded-[10px] border border-[#CCC3D7] bg-white px-3.5 py-2 font-mono text-[14px] leading-5 text-[#2B3342] shadow-[0px_1px_2px_rgba(15,23,42,0.06)] transition hover:bg-[#F8F4FF]"
+                  variant="codeFragment"
                   aria-label={`Code fragment ${fragment}`}
                 >
                   {fragment}
-                </button>
+                </Button>
               ))}
             </div>
           </div>
         ) : null}
 
         {game.template === 'guess-output' && game.choiceOptions?.length ? (
-          <div className="mt-5.25 rounded-[7px] bg-[#F9F9FF] p-5">
+          <div className={`rounded-[7px] bg-[#F9F9FF] ${optionPanelClass}`}>
             <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
               {game.choiceOptions.map((option) => (
-                <button
+                <Button
                   key={option}
-                  type="button"
-                  className="flex h-14.75 items-center justify-center rounded-[10px] border border-[#CCC3D7] bg-white"
+                  variant="choice"
                   aria-label={`Choice ${option}`}
                 >
                   <span className="inline-flex min-w-7.75 items-center justify-center rounded-lg bg-[#EDE9F5] px-2.5 py-2 text-[14.5px] leading-4.5 font-bold text-primary-900">
                     {option}
                   </span>
-                </button>
+                </Button>
               ))}
             </div>
           </div>
         ) : null}
 
-        <div className="mt-auto pt-7 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className={footerClass}>
           <div className="flex flex-wrap items-center gap-7">
             <RewardItem
               iconUrl={xpIconUrl}
@@ -215,12 +270,7 @@ export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
             /> */}
           </div>
 
-          <button
-            type="button"
-            className="inline-flex h-10.75 min-w-41.25 items-center justify-center rounded-xl bg-primary-500 px-6 text-base font-medium text-white transition hover:opacity-95"
-          >
-            {game.ctaLabel}
-          </button>
+          <Button variant="primary">{game.ctaLabel}</Button>
         </div>
       </div>
     </article>

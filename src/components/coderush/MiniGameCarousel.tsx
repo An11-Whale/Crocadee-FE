@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import arrowLeftUrl from '../../assets/icons/coderush-carousel-arrow-left-featured.svg';
 import { miniGames } from '../../features/coderush/data/miniGames';
+import { Button } from '../ui/Button';
 import { MiniGameCard } from './MiniGameCard';
 
 const AUTO_SLIDE_INTERVAL_MS = 7000;
@@ -42,16 +43,16 @@ export function MiniGameCarousel() {
   }, [isAutoSlidePaused]);
 
   const renderCarouselViewport = () => (
-    <div className="overflow-hidden rounded-[11px]">
+    <div className="h-full min-h-0 overflow-hidden rounded-[11px]">
       <div
-        className="flex transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
+        className="flex h-full min-h-0 transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] will-change-transform"
         style={{
           transform: `translateX(-${String(activeIndex * 100)}%)`,
         }}
       >
         {miniGames.map((game) => (
-          <div key={game.id} className="flex w-full shrink-0">
-            <div className="h-full w-full">
+          <div key={game.id} className="flex h-full min-h-0 w-full shrink-0">
+            <div className="h-full min-h-0 w-full">
               <MiniGameCard game={game} isFeatured />
             </div>
           </div>
@@ -61,9 +62,12 @@ export function MiniGameCarousel() {
   );
 
   return (
-    <section aria-label="CodeRush mini-game carousel" className="mt-1">
+    <section
+      aria-label="CodeRush mini-game carousel"
+      className="mt-2 flex min-h-0 flex-1"
+    >
       <div
-        className="mx-auto max-w-255.5"
+        className="mx-auto flex h-full min-h-0 w-full max-w-255.5 flex-col"
         onMouseEnter={() => {
           setIsAutoSlidePaused(true);
         }}
@@ -71,17 +75,12 @@ export function MiniGameCarousel() {
           setIsAutoSlidePaused(false);
         }}
       >
-        <div className="hidden items-center gap-7 md:flex">
-          <button
-            type="button"
+        <div className="hidden min-h-0 flex-1 items-center gap-4 md:flex lg:gap-7">
+          <Button
+            variant="carouselIcon"
             onClick={goPrev}
             disabled={isFirstSlide}
             aria-label="Previous mini-game"
-            className={`flex h-10.75 w-10.75 shrink-0 items-center justify-center rounded-full transition ${
-              isFirstSlide
-                ? 'border border-[#CCC3D7] bg-[#F9F9FF]'
-                : 'bg-primary-900'
-            }`}
           >
             <img
               src={arrowLeftUrl}
@@ -91,20 +90,17 @@ export function MiniGameCarousel() {
                 isFirstSlide ? '' : 'brightness-0 invert'
               }`}
             />
-          </button>
+          </Button>
 
-          <div className="min-w-0 flex-1">{renderCarouselViewport()}</div>
+          <div className="h-full min-w-0 flex-1">
+            {renderCarouselViewport()}
+          </div>
 
-          <button
-            type="button"
+          <Button
+            variant="carouselIcon"
             onClick={goNext}
             disabled={isLastSlide}
             aria-label="Next mini-game"
-            className={`flex h-10.75 w-10.75 shrink-0 items-center justify-center rounded-full transition ${
-              isLastSlide
-                ? 'border border-[#CCC3D7] bg-[#F9F9FF]'
-                : 'bg-primary-900'
-            }`}
           >
             <img
               src={arrowLeftUrl}
@@ -114,23 +110,19 @@ export function MiniGameCarousel() {
                 isLastSlide ? '' : 'brightness-0 invert'
               }`}
             />
-          </button>
+          </Button>
         </div>
 
-        <div className="relative md:hidden">
+        <div className="relative min-h-0 flex-1 md:hidden">
           {renderCarouselViewport()}
 
           <div className="pointer-events-none absolute inset-x-3 top-1/2 flex -translate-y-1/2 items-center justify-between">
-            <button
-              type="button"
+            <Button
+              variant="carouselIcon"
               onClick={goPrev}
               disabled={isFirstSlide}
               aria-label="Previous mini-game"
-              className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full transition ${
-                isFirstSlide
-                  ? 'border border-[#CCC3D7] bg-[#F9F9FF]'
-                  : 'bg-primary-900'
-              }`}
+              className="pointer-events-auto"
             >
               <img
                 src={arrowLeftUrl}
@@ -140,18 +132,14 @@ export function MiniGameCarousel() {
                   isFirstSlide ? '' : 'brightness-0 invert'
                 }`}
               />
-            </button>
+            </Button>
 
-            <button
-              type="button"
+            <Button
+              variant="carouselIcon"
               onClick={goNext}
               disabled={isLastSlide}
               aria-label="Next mini-game"
-              className={`pointer-events-auto flex h-10 w-10 items-center justify-center rounded-full transition ${
-                isLastSlide
-                  ? 'border border-[#CCC3D7] bg-[#F9F9FF]'
-                  : 'bg-primary-900'
-              }`}
+              className="pointer-events-auto"
             >
               <img
                 src={arrowLeftUrl}
@@ -161,28 +149,24 @@ export function MiniGameCarousel() {
                   isLastSlide ? '' : 'brightness-0 invert'
                 }`}
               />
-            </button>
+            </Button>
           </div>
         </div>
 
-        <div className="mt-3.5 flex items-center justify-center gap-3.5">
+        <div className="mt-2.5 flex shrink-0 items-center justify-center gap-3.5">
           {miniGames.map((game, index) => {
             const isActive = index === activeIndex;
 
             return (
-              <button
+              <Button
                 key={game.id}
-                type="button"
+                variant="paginationDot"
+                isActive={isActive}
                 aria-label={`Go to ${game.title}`}
                 aria-current={isActive ? 'true' : undefined}
                 onClick={() => {
                   setActiveIndex(index);
                 }}
-                className={`rounded-full transition ${
-                  isActive
-                    ? 'h-1.75 w-7 bg-primary-900'
-                    : 'h-1.75 w-1.75 bg-[#CCC3D7] hover:bg-[#B4ABBF]'
-                }`}
               />
             );
           })}

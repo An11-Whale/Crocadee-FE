@@ -4,15 +4,19 @@ import { TopNavbar } from '../components/layout/TopNavbar';
 
 export const Route = createLazyFileRoute('/coderush')({
   component: () => (
-    <main className="min-h-screen bg-[#F9F9FF] text-neutral-900">
+    <main className="flex h-dvh flex-col overflow-hidden bg-[#F9F9FF] text-neutral-900">
       <TopNavbar activeItem="coderush" />
 
-      <section className="mx-auto w-full max-w-275 px-6 pt-4 pb-8">
-        <h1 className="text-5xl font-extrabold text-neutral-900">CodeRush</h1>
-        <p className="mt-1.5 max-w-3xl text-base leading-6 text-[#4A4454]">
-          Sharpen your skills with bite-sized mini-games. Earn XP, collect
-          badges, and climb the leaderboard.
-        </p>
+      <section className="mx-auto flex min-h-0 w-full max-w-275 flex-1 flex-col px-4 py-2.5 sm:px-6 sm:py-3">
+        <div className="shrink-0">
+          <h1 className="text-[clamp(2rem,4.8vh,3rem)] leading-none font-extrabold text-neutral-900">
+            CodeRush
+          </h1>
+          <p className="mt-1 max-w-3xl text-sm leading-5 text-[#4A4454] sm:text-base sm:leading-6">
+            Sharpen your skills with bite-sized mini-games. Earn XP, collect
+            badges, and climb the leaderboard.
+          </p>
+        </div>
 
         <MiniGameCarousel />
       </section>
