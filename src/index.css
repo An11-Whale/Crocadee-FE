@@ -67,8 +67,9 @@
   /* ── Shades ──────────────────────────────────────────────── */
   --color-shade-white: #ffffff;
   --color-shade-black: #000000;
-
-
+  
+   /* ── Background-Color ──────────────────────────────────────────────── */
+  --color-bg-default: #AAA3FF26;
 
 
 
