@@ -1,15 +1,17 @@
-import { TopNavbar } from '../../../components/layout/Topnavbar';
+import { TopNavbar } from '../../../components/layout/TopNavbar';
+import { HeroSection } from '../components/HeroSection';
+import { MissionSection } from '../components/MissionSection';
+import { ToolsSection } from '../components/ToolsSection';
+import { FooterSection } from '../components/FooterSection';
 export const LandingPage = () => {
   return (
     <>
-      <TopNavbar />
-      <div className="flex flex-col items-center justify-center min-h-screen bg-purple-50">
-        <h1 className="text-4xl font-extrabold text-purple-600 mb-4">
-          🎉 Kết nối thành công!
-        </h1>
-        <p className="text-lg text-gray-600">
-          Đây là file LandingPage.tsx. Router đã gọi đúng file rồi đó!
-        </p>
+      <div className="min-h-screen bg-bg-default font-sans text-neutral-900">
+        <TopNavbar />
+        <HeroSection />
+        <MissionSection />
+        <ToolsSection />
+        <FooterSection />
       </div>
     </>
   );
