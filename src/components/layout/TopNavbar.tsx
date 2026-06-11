@@ -10,6 +10,7 @@ type NavbarItem = 'home' | 'practice-lab' | 'challenge' | 'coderush';
 interface TopNavbarProps {
   activeItem?: NavbarItem;
   isLoggedIn?: boolean;
+  username?: string;
 }
 
 const navItems: {
@@ -53,14 +54,14 @@ const NavLinks = ({ activeItem, isLoggedIn }: TopNavbarProps) => (
 );
 
 /* SUB-COMPONENT: USER PROFILE MENU (AUTHENTICATED) */
-const UserProfileMenu = () => (
+const UserProfileMenu = ({ username }: { username?: string }) => (
   <button
     type="button"
     className="flex items-center gap-3 rounded-xl border border-transparent px-3 py-1.5 cursor-pointer hover:bg-primary-700/5 transition"
   >
-    <div className="flex flex-col items-end">
+    <div className="flex flex-col items-center">
       <span className="text-base font-bold leading-3.5 tracking-[0.0088em] text-neutral-900">
-        Username
+        {username ?? 'Username'}
       </span>
       <div className="mt-1 flex items-center gap-2">
         <span className="text-[10px] font-bold uppercase leading-4 tracking-[0.05em] text-primary-900">
@@ -92,7 +93,11 @@ const AuthButtons = () => (
 );
 
 /* MAIN COMPONENT: TOP NAVBAR */
-export function TopNavbar({ activeItem, isLoggedIn = false }: TopNavbarProps) {
+export function TopNavbar({
+  activeItem,
+  isLoggedIn = false,
+  username,
+}: TopNavbarProps) {
   return (
     <header className="flex h-14 items-center justify-between bg-primary-100 px-6">
       <div className="flex items-center gap-8">
@@ -130,7 +135,7 @@ export function TopNavbar({ activeItem, isLoggedIn = false }: TopNavbarProps) {
           />
         </button>
 
-        {isLoggedIn ? <UserProfileMenu /> : <AuthButtons />}
+        {isLoggedIn ? <UserProfileMenu username={username} /> : <AuthButtons />}
       </div>
     </header>
   );

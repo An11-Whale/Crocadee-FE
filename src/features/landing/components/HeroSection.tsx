@@ -14,7 +14,7 @@ export function HeroSection() {
           <span className="italic text-primary-500">AI-Powered</span> <br />
           Gamification
         </h1>
-        <p className="max-w-[480px] text-lg leading-relaxed text-neutral-700">
+        <p className="max-w-120 text-lg leading-relaxed text-neutral-700">
           Turn your learning journey into an adventure.{' '}
           <span className="font-bold text-neutral-900">CodeBite</span> blends{' '}
           <span className="font-bold text-neutral-900">
@@ -30,13 +30,13 @@ export function HeroSection() {
       </div>
 
       {/* LOGO */}
-      <div className="relative flex flex-col items-center justify-center w-full min-h-[450px] overflow-visible">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] rounded-full bg-primary-500/50 blur-[120px] pointer-events-none select-none"></div>
+      <div className="relative flex flex-col items-center justify-center w-full min-h-112.5 overflow-visible">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-87.5 h-87.5 rounded-full bg-primary-500/50 blur-[120px] pointer-events-none select-none"></div>
 
         <img
           src={bigLogoUrl}
           alt="CodeBite Big Logo"
-          className="relative z-10 w-full max-w-[600px] object-contain"
+          className="relative z-10 w-full max-w-150 object-contain"
         />
 
         <h2 className="relative z-10 mt-6 text-[80px] font-extrabold tracking-tight text-primary-500">
