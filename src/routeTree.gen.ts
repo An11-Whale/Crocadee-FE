@@ -8,89 +8,89 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
-import { Route as rootRouteImport } from './routes/__root';
-import { Route as TryItRouteImport } from './routes/try-it';
-import { Route as PracticeRouteImport } from './routes/practice';
-import { Route as CoderushRouteImport } from './routes/coderush';
-import { Route as ChanllengeRouteImport } from './routes/chanllenge';
-import { Route as ChallengeRouteImport } from './routes/challenge';
-import { Route as IndexRouteImport } from './routes/index';
-import { Route as ChallengeIndexRouteImport } from './routes/challenge.index';
-import { Route as ChallengeIdRouteImport } from './routes/challenge.$id';
+import { Route as rootRouteImport } from './routes/__root'
+import { Route as TryItRouteImport } from './routes/try-it'
+import { Route as PracticeRouteImport } from './routes/practice'
+import { Route as CoderushRouteImport } from './routes/coderush'
+import { Route as ChanllengeRouteImport } from './routes/chanllenge'
+import { Route as ChallengeRouteImport } from './routes/challenge'
+import { Route as IndexRouteImport } from './routes/index'
+import { Route as ChallengeIndexRouteImport } from './routes/challenge.index'
+import { Route as ChallengeIdRouteImport } from './routes/challenge.$id'
 
 const TryItRoute = TryItRouteImport.update({
   id: '/try-it',
   path: '/try-it',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const PracticeRoute = PracticeRouteImport.update({
   id: '/practice',
   path: '/practice',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const CoderushRoute = CoderushRouteImport.update({
   id: '/coderush',
   path: '/coderush',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ChanllengeRoute = ChanllengeRouteImport.update({
   id: '/chanllenge',
   path: '/chanllenge',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ChallengeRoute = ChallengeRouteImport.update({
   id: '/challenge',
   path: '/challenge',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
-} as any);
+} as any)
 const ChallengeIndexRoute = ChallengeIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => ChallengeRoute,
-} as any);
+} as any)
 const ChallengeIdRoute = ChallengeIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => ChallengeRoute,
-} as any);
+} as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute;
-  '/challenge': typeof ChallengeRouteWithChildren;
-  '/chanllenge': typeof ChanllengeRoute;
-  '/coderush': typeof CoderushRoute;
-  '/practice': typeof PracticeRoute;
-  '/try-it': typeof TryItRoute;
-  '/challenge/$id': typeof ChallengeIdRoute;
-  '/challenge/': typeof ChallengeIndexRoute;
+  '/': typeof IndexRoute
+  '/challenge': typeof ChallengeRouteWithChildren
+  '/chanllenge': typeof ChanllengeRoute
+  '/coderush': typeof CoderushRoute
+  '/practice': typeof PracticeRoute
+  '/try-it': typeof TryItRoute
+  '/challenge/$id': typeof ChallengeIdRoute
+  '/challenge/': typeof ChallengeIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute;
-  '/chanllenge': typeof ChanllengeRoute;
-  '/coderush': typeof CoderushRoute;
-  '/practice': typeof PracticeRoute;
-  '/try-it': typeof TryItRoute;
-  '/challenge/$id': typeof ChallengeIdRoute;
-  '/challenge': typeof ChallengeIndexRoute;
+  '/': typeof IndexRoute
+  '/chanllenge': typeof ChanllengeRoute
+  '/coderush': typeof CoderushRoute
+  '/practice': typeof PracticeRoute
+  '/try-it': typeof TryItRoute
+  '/challenge/$id': typeof ChallengeIdRoute
+  '/challenge': typeof ChallengeIndexRoute
 }
 export interface FileRoutesById {
-  __root__: typeof rootRouteImport;
-  '/': typeof IndexRoute;
-  '/challenge': typeof ChallengeRouteWithChildren;
-  '/chanllenge': typeof ChanllengeRoute;
-  '/coderush': typeof CoderushRoute;
-  '/practice': typeof PracticeRoute;
-  '/try-it': typeof TryItRoute;
-  '/challenge/$id': typeof ChallengeIdRoute;
-  '/challenge/': typeof ChallengeIndexRoute;
+  __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
+  '/challenge': typeof ChallengeRouteWithChildren
+  '/chanllenge': typeof ChanllengeRoute
+  '/coderush': typeof CoderushRoute
+  '/practice': typeof PracticeRoute
+  '/try-it': typeof TryItRoute
+  '/challenge/$id': typeof ChallengeIdRoute
+  '/challenge/': typeof ChallengeIndexRoute
 }
 export interface FileRouteTypes {
-  fileRoutesByFullPath: FileRoutesByFullPath;
+  fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/challenge'
@@ -99,8 +99,8 @@ export interface FileRouteTypes {
     | '/practice'
     | '/try-it'
     | '/challenge/$id'
-    | '/challenge/';
-  fileRoutesByTo: FileRoutesByTo;
+    | '/challenge/'
+  fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/chanllenge'
@@ -108,7 +108,7 @@ export interface FileRouteTypes {
     | '/practice'
     | '/try-it'
     | '/challenge/$id'
-    | '/challenge';
+    | '/challenge'
   id:
     | '__root__'
     | '/'
@@ -118,92 +118,92 @@ export interface FileRouteTypes {
     | '/practice'
     | '/try-it'
     | '/challenge/$id'
-    | '/challenge/';
-  fileRoutesById: FileRoutesById;
+    | '/challenge/'
+  fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute;
-  ChallengeRoute: typeof ChallengeRouteWithChildren;
-  ChanllengeRoute: typeof ChanllengeRoute;
-  CoderushRoute: typeof CoderushRoute;
-  PracticeRoute: typeof PracticeRoute;
-  TryItRoute: typeof TryItRoute;
+  IndexRoute: typeof IndexRoute
+  ChallengeRoute: typeof ChallengeRouteWithChildren
+  ChanllengeRoute: typeof ChanllengeRoute
+  CoderushRoute: typeof CoderushRoute
+  PracticeRoute: typeof PracticeRoute
+  TryItRoute: typeof TryItRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
     '/try-it': {
-      id: '/try-it';
-      path: '/try-it';
-      fullPath: '/try-it';
-      preLoaderRoute: typeof TryItRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/try-it'
+      path: '/try-it'
+      fullPath: '/try-it'
+      preLoaderRoute: typeof TryItRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/practice': {
-      id: '/practice';
-      path: '/practice';
-      fullPath: '/practice';
-      preLoaderRoute: typeof PracticeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/practice'
+      path: '/practice'
+      fullPath: '/practice'
+      preLoaderRoute: typeof PracticeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/coderush': {
-      id: '/coderush';
-      path: '/coderush';
-      fullPath: '/coderush';
-      preLoaderRoute: typeof CoderushRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/coderush'
+      path: '/coderush'
+      fullPath: '/coderush'
+      preLoaderRoute: typeof CoderushRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/chanllenge': {
-      id: '/chanllenge';
-      path: '/chanllenge';
-      fullPath: '/chanllenge';
-      preLoaderRoute: typeof ChanllengeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/chanllenge'
+      path: '/chanllenge'
+      fullPath: '/chanllenge'
+      preLoaderRoute: typeof ChanllengeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/challenge': {
-      id: '/challenge';
-      path: '/challenge';
-      fullPath: '/challenge';
-      preLoaderRoute: typeof ChallengeRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/challenge'
+      path: '/challenge'
+      fullPath: '/challenge'
+      preLoaderRoute: typeof ChallengeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
-      id: '/';
-      path: '/';
-      fullPath: '/';
-      preLoaderRoute: typeof IndexRouteImport;
-      parentRoute: typeof rootRouteImport;
-    };
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/challenge/': {
-      id: '/challenge/';
-      path: '/';
-      fullPath: '/challenge/';
-      preLoaderRoute: typeof ChallengeIndexRouteImport;
-      parentRoute: typeof ChallengeRoute;
-    };
+      id: '/challenge/'
+      path: '/'
+      fullPath: '/challenge/'
+      preLoaderRoute: typeof ChallengeIndexRouteImport
+      parentRoute: typeof ChallengeRoute
+    }
     '/challenge/$id': {
-      id: '/challenge/$id';
-      path: '/$id';
-      fullPath: '/challenge/$id';
-      preLoaderRoute: typeof ChallengeIdRouteImport;
-      parentRoute: typeof ChallengeRoute;
-    };
+      id: '/challenge/$id'
+      path: '/$id'
+      fullPath: '/challenge/$id'
+      preLoaderRoute: typeof ChallengeIdRouteImport
+      parentRoute: typeof ChallengeRoute
+    }
   }
 }
 
 interface ChallengeRouteChildren {
-  ChallengeIdRoute: typeof ChallengeIdRoute;
-  ChallengeIndexRoute: typeof ChallengeIndexRoute;
+  ChallengeIdRoute: typeof ChallengeIdRoute
+  ChallengeIndexRoute: typeof ChallengeIndexRoute
 }
 
 const ChallengeRouteChildren: ChallengeRouteChildren = {
   ChallengeIdRoute: ChallengeIdRoute,
   ChallengeIndexRoute: ChallengeIndexRoute,
-};
+}
 
 const ChallengeRouteWithChildren = ChallengeRoute._addFileChildren(
-  ChallengeRouteChildren
-);
+  ChallengeRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -212,7 +212,7 @@ const rootRouteChildren: RootRouteChildren = {
   CoderushRoute: CoderushRoute,
   PracticeRoute: PracticeRoute,
   TryItRoute: TryItRoute,
-};
+}
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
-  ._addFileTypes<FileRouteTypes>();
+  ._addFileTypes<FileRouteTypes>()
