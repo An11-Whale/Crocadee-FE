@@ -125,21 +125,26 @@ const UserProfileMenu = ({ username }: { username?: string }) => {
       {/* DROPDOWN MENU */}
       {isOpen && (
         <div className="absolute right-0 top-full  w-48 overflow-hidden rounded-md border border-neutral-200 bg-shade-white shadow-lg z-50">
-          <a
-            href="/profile"
-            className="flex items-center gap-3 border-b border-neutral-200 px-4 py-3 text-neutral-900 transition hover:bg-neutral-100"
+          <Button
+            variant="menu"
+            onClick={() => {
+              setIsOpen(false);
+              void navigate({ to: '/profile' });
+            }}
+            className="flex items-center gap-8 border-b border-neutral-200 "
           >
             <img src={profileModeIconUrl} alt="Profile" className="h-5 w-5" />
-            <span className="text-[16px] font-medium">Profile</span>
-          </a>
+            <span>Profile</span>
+          </Button>
 
-          <button
+          <Button
+            variant="menu-danger"
             onClick={() => void handleLogout()}
-            className="flex w-full cursor-pointer items-center gap-3 px-4 py-3 text-left text-danger-700 transition hover:bg-neutral-100"
+            className="flex items-center gap-8"
           >
             <img src={logoutIconUrl} alt="Logout" className="h-5 w-5" />
-            <span className="text-[16px] font-medium">Logout</span>
-          </button>
+            <span>Logout</span>
+          </Button>
         </div>
       )}
     </div>
