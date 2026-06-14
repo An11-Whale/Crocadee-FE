@@ -313,14 +313,14 @@ export function HomePage() {
 
   if (isLoading || !data) {
     return (
-      <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-bg-default">
+      <div className="flex min-h-[calc(100vh-56px)] items-center justify-center bg-bg-default">
         <div className="text-lg font-medium text-primary-500">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="h-[calc(100vh-80px)] bg-bg-default overflow-hidden">
+    <div className="h-[calc(100vh-56px)] bg-bg-default overflow-hidden">
       <div className="mx-auto flex h-full max-w-300 flex-col p-4 font-sans text-neutral-900">
         <div className="shrink-0">
           <ResumeBanner resumeLesson={data.resumeLesson} />
