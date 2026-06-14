@@ -1,6 +1,6 @@
-import flowIconUrl from '../../../assets/icon/flow.svg';
-import rigorIconUrl from '../../../assets/icon/rigor.svg';
-import communityIconUrl from '../../../assets/icon/community.svg';
+import flowIconUrl from '../../../assets/icon/landing-flow.svg';
+import rigorIconUrl from '../../../assets/icon/landing-rigor.svg';
+import communityIconUrl from '../../../assets/icon/landing-community.svg';
 
 export function MissionSection() {
   return (
@@ -20,7 +20,7 @@ export function MissionSection() {
 
       <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
         {/* Cognitive Flow */}
-        <div className="flex flex-col items-start rounded-[24px] bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
+        <div className="flex flex-col items-start rounded-3xl bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
           <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100">
             <img
               src={flowIconUrl}
@@ -38,7 +38,7 @@ export function MissionSection() {
         </div>
 
         {/*Professional Rigor */}
-        <div className="flex flex-col items-start rounded-[24px] bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
+        <div className="flex flex-col items-start rounded-3xl bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
           <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100">
             <img
               src={rigorIconUrl}
@@ -56,7 +56,7 @@ export function MissionSection() {
         </div>
 
         {/* Community Driven */}
-        <div className="flex flex-col items-start rounded-[24px] bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
+        <div className="flex flex-col items-start rounded-3xl bg-shade-white p-8 text-left shadow-sm border border-neutral-100 transition-transform hover:-translate-y-1 hover:shadow-md">
           <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100">
             <img
               src={communityIconUrl}

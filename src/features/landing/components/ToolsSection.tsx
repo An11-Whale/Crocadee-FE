@@ -1,6 +1,6 @@
 import { Button } from '../../../components/button';
-import gearIconUrl from '../../../assets/icon/spinning-gear.svg';
-import dailyStreakUrl from '../../../assets/icon/daily streak.svg';
+import gearIconUrl from '../../../assets/icon/landing-spinning-gear.svg';
+import dailyStreakUrl from '../../../assets/icon/landing-daily streak.svg';
 
 export function ToolsSection() {
   return (
@@ -17,7 +17,7 @@ export function ToolsSection() {
             ========================================= */}
 
         {/*AI Targeted Review */}
-        <div className="relative col-span-1 flex flex-col items-start overflow-hidden rounded-[32px] border border-neutral-100 bg-shade-white shadow-sm p-10 text-left md:col-span-2 transition-transform hover:-translate-y-1 hover:shadow-md">
+        <div className="relative col-span-1 flex flex-col items-start overflow-hidden rounded-4xl border border-neutral-100 bg-shade-white shadow-sm p-10 text-left md:col-span-2 transition-transform hover:-translate-y-1 hover:shadow-md">
           <span className="rounded-full bg-primary-500 px-3 py-1.5 text-[10px] font-bold tracking-widest text-shade-white uppercase">
             CORE FEATURE
           </span>
@@ -38,7 +38,7 @@ export function ToolsSection() {
         </div>
 
         {/*RPG Progression */}
-        <div className="col-span-1 flex flex-col items-center justify-center rounded-[32px] border border-neutral-100 bg-shade-white shadow-sm p-10 text-center transition-transform hover:-translate-y-1 hover:shadow-md">
+        <div className="col-span-1 flex flex-col items-center justify-center rounded-4xl border border-neutral-100 bg-shade-white shadow-sm p-10 text-center transition-transform hover:-translate-y-1 hover:shadow-md">
           <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-neutral-100 bg-shade-white shadow-sm text-primary-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export function ToolsSection() {
             ========================================= */}
 
         {/* Weekly Leaderboard */}
-        <div className="col-span-1 flex flex-col justify-between rounded-[32px] bg-[#8F81FF] p-8 text-shade-white shadow-sm hover:-translate-y-1 hover:shadow-md transition-transform relative overflow-hidden">
+        <div className="col-span-1 flex flex-col justify-between rounded-4xl bg-[#8F81FF] p-8 text-shade-white shadow-sm hover:-translate-y-1 hover:shadow-md transition-transform relative overflow-hidden">
           <div className="pointer-events-none select-none">
             <div className="mb-6 flex items-center gap-3">
               <svg
@@ -128,7 +128,7 @@ export function ToolsSection() {
         </div>
 
         {/* Daily Quests */}
-        <div className="col-span-1 flex flex-col items-center justify-between gap-8 rounded-[32px] border border-neutral-100 bg-shade-white p-10 text-left md:col-span-2 md:flex-row shadow-sm hover:-translate-y-1 hover:shadow-md transition-transform">
+        <div className="col-span-1 flex flex-col items-center justify-between gap-8 rounded-4xl border border-neutral-100 bg-shade-white p-10 text-left md:col-span-2 md:flex-row shadow-sm hover:-translate-y-1 hover:shadow-md transition-transform">
           <div className="w-full md:w-1/2 flex justify-center">
             <div className="w-full max-w-[320px] rounded-[20px] overflow-hidden border border-neutral-100 shadow-sm flex items-center justify-center bg-shade-white">
               <img
