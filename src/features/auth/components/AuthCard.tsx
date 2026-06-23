@@ -11,7 +11,7 @@ interface AuthCardProps {
 export function AuthCard({ title, subtitle, children, footer }: AuthCardProps) {
   return (
     <main className="flex min-h-screen items-start justify-center overflow-y-auto bg-primary-100 px-4 py-8 font-sans text-neutral-900 sm:px-6">
-      <section className="my-auto w-full max-w-[460px] rounded-3xl border border-primary-300 bg-shade-white px-6 py-7 shadow-2xl shadow-primary-300/30 sm:px-9 sm:py-8">
+      <section className="my-auto w-full max-w-115 rounded-3xl border border-primary-300 bg-shade-white px-6 py-7 shadow-2xl shadow-primary-300/30 sm:px-9 sm:py-8">
         <div className="mb-7 flex flex-col items-center text-center">
           <img
             src={codebiteLogoUrl}
