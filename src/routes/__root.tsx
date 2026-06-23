@@ -1,9 +1,57 @@
-import { createRootRoute, Outlet } from '@tanstack/react-router';
+import {
+  createRootRoute,
+  Outlet,
+  useRouterState,
+} from '@tanstack/react-router';
+import { TopNavbar } from '../components/layout/TopNavbar';
 
 export const Route = createRootRoute({
-  component: () => (
-    <div className="min-h-screen bg-primary-100 text-neutral-900">
-      <Outlet />
-    </div>
-  ),
+  component: RootComponent,
 });
+
+function RootComponent() {
+  const pathname = useRouterState({
+    select: (state) => state.location.pathname,
+  });
+
+  const noNavbarRoutes = ['/login', '/signup'];
+  const shouldShowNavbar = !noNavbarRoutes.includes(pathname);
+
+  const authUserString =
+    localStorage.getItem('authUser') ?? sessionStorage.getItem('authUser');
+
+  let isLoggedIn = false;
+  let username = '';
+
+  if (authUserString) {
+    try {
+      const authUser = JSON.parse(authUserString) as { username: string };
+      isLoggedIn = true;
+      username = authUser.username;
+    } catch (error) {
+      console.error('Lỗi parse authUser:', error);
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-primary-100 text-neutral-900">
+      {shouldShowNavbar && (
+        <TopNavbar
+          activeItem={
+            pathname.replace('/', '') as
+              | 'home'
+              | 'practice-lab'
+              | 'challenge'
+              | 'coderush'
+          }
+          isLoggedIn={isLoggedIn}
+          username={username}
+        />
+      )}
+
+      <main>
+        <Outlet />
+      </main>
+    </div>
+  );
+}
