@@ -7,21 +7,68 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
+.pnp
+.pnp.js
+
+# Build output
 dist
 dist-ssr
-*.local
+build
+
+# TypeScript
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+
+# Testing / Coverage
+coverage
+.nyc_output
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-# local env files
-.env.local
-.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Vite
+*.local
+
+# Yarn / npm
+.yarn/
+.yarnrc.yml
+.yarn-integrity
+.npmrc
+
+# Misc
+*.pem
+.eslintcache
+*.tgz
+cypress/screenshots/
+cypress/videos/
+tmp/
+temp/
+
+# AI assistant config
+.serena/
+.agents
+.clinerules
+skills-lock.json
