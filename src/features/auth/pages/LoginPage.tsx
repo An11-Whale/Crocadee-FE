@@ -1,6 +1,7 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useState, type ChangeEvent, type SyntheticEvent } from 'react';
 import googleLogoUrl from '../../../assets/logo/Google logo.svg';
+import { getAuthErrorMessage, login, saveAuthSession } from '../api/authApi';
 import { AuthCard } from '../components/AuthCard';
 import { AuthPasswordInput } from '../components/AuthPasswordInput';
 import { AuthTextInput } from '../components/AuthTextInput';
@@ -22,15 +23,19 @@ const initialLoginValues: LoginFormValues = {
 };
 
 export function LoginPage() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] =
     useState<LoginFormValues>(initialLoginValues);
   const [errors, setErrors] = useState<LoginErrors>({});
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTextChange =
     (field: 'username' | 'password') =>
     (event: ChangeEvent<HTMLInputElement>) => {
       setFormValues((current) => ({ ...current, [field]: event.target.value }));
       setErrors((current) => ({ ...current, [field]: undefined }));
+      setSubmitError('');
     };
 
   const handleRememberChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -55,15 +60,38 @@ export function LoginPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
+  const submitLogin = async () => {
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const authResponse = await login({
+        username: formValues.username.trim(),
+        password: formValues.password,
+      });
+
+      saveAuthSession(authResponse, formValues.rememberMe);
+      await navigate({ to: '/' });
+    } catch (error) {
+      setSubmitError(
+        getAuthErrorMessage(
+          error,
+          'Unable to sign in. Please check your account and try again.'
+        )
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!validateForm()) {
+    if (!validateForm() || isSubmitting) {
       return;
     }
 
-    // TODO: Connect to the real sign-in API when the auth endpoint is ready.
-    console.info('Sign in placeholder', formValues);
+    void submitLogin();
   };
 
   return (
@@ -121,11 +149,21 @@ export function LoginPage() {
           </a>
         </div>
 
+        {submitError ? (
+          <p
+            role="alert"
+            className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"
+          >
+            {submitError}
+          </p>
+        ) : null}
+
         <button
           type="submit"
-          className="h-12 w-full rounded-2xl bg-secondary-500 text-base font-bold text-shade-white shadow-lg shadow-secondary-300/40 transition hover:bg-secondary-700 focus:outline-none focus:ring-4 focus:ring-secondary-300/60"
+          disabled={isSubmitting}
+          className="h-12 w-full rounded-2xl bg-secondary-500 text-base font-bold text-shade-white shadow-lg shadow-secondary-300/40 transition hover:bg-secondary-700 focus:outline-none focus:ring-4 focus:ring-secondary-300/60 disabled:cursor-not-allowed disabled:bg-neutral-400 disabled:shadow-none"
         >
-          Sign in
+          {isSubmitting ? 'Signing in...' : 'Sign in'}
         </button>
       </form>
 

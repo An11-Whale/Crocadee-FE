@@ -1,5 +1,6 @@
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 import { useState, type ChangeEvent, type SyntheticEvent } from 'react';
+import { getAuthErrorMessage, register, saveAuthSession } from '../api/authApi';
 import { AuthCard } from '../components/AuthCard';
 import { AuthPasswordInput } from '../components/AuthPasswordInput';
 import { AuthTextInput } from '../components/AuthTextInput';
@@ -23,15 +24,19 @@ const initialSignUpValues: SignUpFormValues = {
 };
 
 export function SignUpPage() {
+  const navigate = useNavigate();
   const [formValues, setFormValues] =
     useState<SignUpFormValues>(initialSignUpValues);
   const [errors, setErrors] = useState<SignUpErrors>({});
+  const [submitError, setSubmitError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleTextChange =
     (field: keyof SignUpFormValues) =>
     (event: ChangeEvent<HTMLInputElement>) => {
       setFormValues((current) => ({ ...current, [field]: event.target.value }));
       setErrors((current) => ({ ...current, [field]: undefined }));
+      setSubmitError('');
     };
 
   const validateForm = () => {
@@ -61,15 +66,40 @@ export function SignUpPage() {
     return Object.keys(nextErrors).length === 0;
   };
 
+  const submitSignUp = async () => {
+    setIsSubmitting(true);
+    setSubmitError('');
+
+    try {
+      const authResponse = await register({
+        username: formValues.username.trim(),
+        email: formValues.email.trim(),
+        password: formValues.password,
+        confirmPassword: formValues.confirmPassword,
+      });
+
+      saveAuthSession(authResponse);
+      await navigate({ to: '/' });
+    } catch (error) {
+      setSubmitError(
+        getAuthErrorMessage(
+          error,
+          'Unable to create your account. Please try again.'
+        )
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const handleSubmit = (event: SyntheticEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!validateForm()) {
+    if (!validateForm() || isSubmitting) {
       return;
     }
 
-    // TODO: Connect to the real sign-up API when the auth endpoint is ready.
-    console.info('Sign up placeholder', formValues);
+    void submitSignUp();
   };
 
   return (
@@ -130,11 +160,21 @@ export function SignUpPage() {
           error={errors.confirmPassword}
         />
 
+        {submitError ? (
+          <p
+            role="alert"
+            className="rounded-xl bg-red-50 px-4 py-3 text-sm font-semibold text-red-700"
+          >
+            {submitError}
+          </p>
+        ) : null}
+
         <button
           type="submit"
-          className="h-12 w-full rounded-2xl bg-secondary-500 text-base font-bold text-shade-white shadow-lg shadow-secondary-300/40 transition hover:bg-secondary-700 focus:outline-none focus:ring-4 focus:ring-secondary-300/60"
+          disabled={isSubmitting}
+          className="h-12 w-full rounded-2xl bg-secondary-500 text-base font-bold text-shade-white shadow-lg shadow-secondary-300/40 transition hover:bg-secondary-700 focus:outline-none focus:ring-4 focus:ring-secondary-300/60 disabled:cursor-not-allowed disabled:bg-neutral-400 disabled:shadow-none"
         >
-          Sign up
+          {isSubmitting ? 'Signing up...' : 'Sign up'}
         </button>
       </form>
     </AuthCard>
