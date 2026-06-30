@@ -6,6 +6,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+skills-lock.json
 
 # Dependencies
 node_modules
@@ -35,6 +36,9 @@ coverage
 
 # Editor directories and files
 .vscode/*
+.agents/*
+.clinerules/*
+.serena/*
 !.vscode/extensions.json
 .idea
 *.suo
