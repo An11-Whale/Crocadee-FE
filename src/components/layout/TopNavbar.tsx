@@ -3,12 +3,12 @@ import { useNavigate, useRouter } from '@tanstack/react-router';
 import { Button } from '../../components/button';
 
 import codebiteLogoUrl from '../../assets/logo/Codebite logo.svg';
-import expBarIconUrl from '../../assets/icon/navbar-exp-bar.svg';
-import notificationIconUrl from '../../assets/icon/navbar-notification.svg';
-import profileIconUrl from '../../assets/icon/navbar-profile.svg';
-import themeIconUrl from '../../assets/icon/navbar-theme.svg';
-import profileModeIconUrl from '../../assets/icon/navbar-profileMode.svg';
-import logoutIconUrl from '../../assets/icon/navbar-logout.svg';
+import expBarIconUrl from '../../assets/icons/navbar-exp-bar.svg';
+import notificationIconUrl from '../../assets/icons/navbar-notification.svg';
+import profileIconUrl from '../../assets/icons/navbar-profile.svg';
+import themeIconUrl from '../../assets/icons/navbar-theme.svg';
+import profileModeIconUrl from '../../assets/icons/navbar-profileMode.svg';
+import logoutIconUrl from '../../assets/icons/navbar-logout.svg';
 
 type NavbarItem = 'home' | 'practice-lab' | 'challenge' | 'coderush';
 

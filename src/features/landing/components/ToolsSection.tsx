@@ -1,6 +1,6 @@
 import { Button } from '../../../components/button';
-import gearIconUrl from '../../../assets/icon/landing-spinning-gear.svg';
-import dailyStreakUrl from '../../../assets/icon/landing-daily streak.svg';
+import gearIconUrl from '../../../assets/icons/landing-spinning-gear.svg';
+import dailyStreakUrl from '../../../assets/icons/landing-daily streak.svg';
 
 export function ToolsSection() {
   return (
