@@ -16,6 +16,7 @@ import { Route as ProfileRouteImport } from './routes/profile';
 const SignupLazyRouteImport = createFileRoute('/signup')();
 const LoginLazyRouteImport = createFileRoute('/login')();
 const HomeLazyRouteImport = createFileRoute('/home')();
+const CoderushLazyRouteImport = createFileRoute('/coderush')();
 const IndexLazyRouteImport = createFileRoute('/')();
 
 const SignupLazyRoute = SignupLazyRouteImport.update({
@@ -38,6 +39,11 @@ const ProfileRoute = ProfileRouteImport.update({
   path: '/profile',
   getParentRoute: () => rootRouteImport,
 } as any);
+const CoderushLazyRoute = CoderushLazyRouteImport.update({
+  id: '/coderush',
+  path: '/coderush',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() => import('./routes/coderush.lazy').then((d) => d.Route));
 const IndexLazyRoute = IndexLazyRouteImport.update({
   id: '/',
   path: '/',
@@ -48,6 +54,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
   '/home': typeof HomeLazyRoute;
+  '/coderush': typeof CoderushLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
 }
@@ -55,6 +62,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
   '/home': typeof HomeLazyRoute;
+  '/coderush': typeof CoderushLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
 }
@@ -63,6 +71,7 @@ export interface FileRoutesById {
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
   '/home': typeof HomeLazyRoute;
+  '/coderush': typeof CoderushLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
 }
@@ -72,12 +81,19 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo;
   to: '/' | '/profile' | '/home' | '/login' | '/signup';
   id: '__root__' | '/' | '/profile' | '/home' | '/login' | '/signup';
+  to: '/' | '/home' | '/login' | '/signup';
+  id: '__root__' | '/' | '/home' | '/login' | '/signup';
+  fullPaths: '/' | '/coderush' | '/login' | '/signup';
+  fileRoutesByTo: FileRoutesByTo;
+  to: '/' | '/coderush' | '/login' | '/signup';
+  id: '__root__' | '/' | '/coderush' | '/login' | '/signup';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
   ProfileRoute: typeof ProfileRoute;
   HomeLazyRoute: typeof HomeLazyRoute;
+  CoderushLazyRoute: typeof CoderushLazyRoute;
   LoginLazyRoute: typeof LoginLazyRoute;
   SignupLazyRoute: typeof SignupLazyRoute;
 }
@@ -103,6 +119,11 @@ declare module '@tanstack/react-router' {
       path: '/home';
       fullPath: '/home';
       preLoaderRoute: typeof HomeLazyRouteImport;
+    '/coderush': {
+      id: '/coderush';
+      path: '/coderush';
+      fullPath: '/coderush';
+      preLoaderRoute: typeof CoderushLazyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
     '/profile': {
@@ -126,6 +147,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ProfileRoute: ProfileRoute,
   HomeLazyRoute: HomeLazyRoute,
+  CoderushLazyRoute: CoderushLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
   SignupLazyRoute: SignupLazyRoute,
 };
