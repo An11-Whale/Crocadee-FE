@@ -1,7 +1,13 @@
 import React from 'react';
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'white' | 'ghost';
+  variant?:
+    | 'primary'
+    | 'secondary'
+    | 'white'
+    | 'ghost'
+    | 'menu'
+    | 'menu-danger';
   href?: string;
   className?: string;
   children: React.ReactNode;
@@ -26,6 +32,9 @@ export const Button = ({
       'bg-shade-white text-neutral-900 shadow-sm border border-neutral-100 hover:bg-neutral-50',
     ghost:
       'bg-transparent text-neutral-600 hover:bg-primary-100 hover:text-primary-700',
+    menu: 'w-full justify-start rounded-none bg-transparent text-neutral-900 hover:bg-neutral-100 font-medium px-4 py-3 text-[16px]',
+    'menu-danger':
+      'w-full justify-start rounded-none bg-transparent text-danger-700 hover:bg-neutral-100 font-medium px-4 py-3 text-[16px]',
   };
 
   const defaultSize = 'px-6 py-3 text-base';
