@@ -1,6 +1,6 @@
-import flowIconUrl from '../../../assets/icon/landing-flow.svg';
-import rigorIconUrl from '../../../assets/icon/landing-rigor.svg';
-import communityIconUrl from '../../../assets/icon/landing-community.svg';
+import flowIconUrl from '../../../assets/icons/landing-flow.svg';
+import rigorIconUrl from '../../../assets/icons/landing-rigor.svg';
+import communityIconUrl from '../../../assets/icons/landing-community.svg';
 
 export function MissionSection() {
   return (

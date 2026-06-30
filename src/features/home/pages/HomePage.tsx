@@ -3,14 +3,14 @@ import { homeApi } from '../api/homeApi';
 import type { DashboardData } from '../api/homeApi';
 import { Button } from '../../../components/button';
 
-import profileIcon from '../../../assets/icon/navbar-profile.svg';
-import fireIcon from '../../../assets/icon/home-fire.svg';
-import tickIcon from '../../../assets/icon/home-tick.svg';
-import playIcon from '../../../assets/icon/home-play.svg';
-import lockIcon from '../../../assets/icon/home-lock.svg';
-import cupIcon from '../../../assets/icon/home-cup.svg';
-import leaderboardIcon from '../../../assets/icon/home-leaderboard.svg';
-import robotIcon from '../../../assets/icon/home-robot.svg';
+import profileIcon from '../../../assets/icons/navbar-profile.svg';
+import fireIcon from '../../../assets/icons/home-fire.svg';
+import tickIcon from '../../../assets/icons/home-tick.svg';
+import playIcon from '../../../assets/icons/home-play.svg';
+import lockIcon from '../../../assets/icons/home-lock.svg';
+import cupIcon from '../../../assets/icons/home-cup.svg';
+import leaderboardIcon from '../../../assets/icons/home-leaderboard.svg';
+import robotIcon from '../../../assets/icons/home-robot.svg';
 
 /* ==========================================================================
    1. SUB-COMPONENT: RESUME BANNER
