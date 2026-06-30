@@ -1,6 +1,6 @@
 import { useState, type ChangeEventHandler } from 'react';
-import eyeOffIconUrl from '../../../assets/icon/Eye off.svg';
-import eyeOnIconUrl from '../../../assets/icon/Eye on.svg';
+import eyeOffIconUrl from '../../../assets/icons/auth-eye-on.svg';
+import eyeOnIconUrl from '../../../assets/icons/auth-eye-off.svg';
 
 interface AuthPasswordInputProps {
   id: string;
