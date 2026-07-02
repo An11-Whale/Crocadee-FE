@@ -18,6 +18,9 @@ const LoginLazyRouteImport = createFileRoute('/login')();
 const HomeLazyRouteImport = createFileRoute('/home')();
 const CoderushLazyRouteImport = createFileRoute('/coderush')();
 const IndexLazyRouteImport = createFileRoute('/')();
+const CoderushGuess_outputSeedLazyRouteImport = createFileRoute(
+  '/coderush/guess_output/$seed'
+)();
 
 const SignupLazyRoute = SignupLazyRouteImport.update({
   id: '/signup',
@@ -49,37 +52,62 @@ const IndexLazyRoute = IndexLazyRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any).lazy(() => import('./routes/index.lazy').then((d) => d.Route));
+const CoderushGuess_outputSeedLazyRoute =
+  CoderushGuess_outputSeedLazyRouteImport.update({
+    id: '/guess_output/$seed',
+    path: '/guess_output/$seed',
+    getParentRoute: () => CoderushLazyRoute,
+  } as any).lazy(() =>
+    import('./routes/coderush/guess_output.$seed.lazy').then((d) => d.Route)
+  );
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
-  '/coderush': typeof CoderushLazyRoute;
+  '/coderush': typeof CoderushLazyRouteWithChildren;
   '/home': typeof HomeLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
+  '/coderush/guess_output/$seed': typeof CoderushGuess_outputSeedLazyRoute;
 }
 export interface FileRoutesByTo {
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
-  '/coderush': typeof CoderushLazyRoute;
+  '/coderush': typeof CoderushLazyRouteWithChildren;
   '/home': typeof HomeLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
+  '/coderush/guess_output/$seed': typeof CoderushGuess_outputSeedLazyRoute;
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport;
   '/': typeof IndexLazyRoute;
   '/profile': typeof ProfileRoute;
-  '/coderush': typeof CoderushLazyRoute;
+  '/coderush': typeof CoderushLazyRouteWithChildren;
   '/home': typeof HomeLazyRoute;
   '/login': typeof LoginLazyRoute;
   '/signup': typeof SignupLazyRoute;
+  '/coderush/guess_output/$seed': typeof CoderushGuess_outputSeedLazyRoute;
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath;
-  fullPaths: '/' | '/profile' | '/coderush' | '/home' | '/login' | '/signup';
+  fullPaths:
+    | '/'
+    | '/profile'
+    | '/coderush'
+    | '/home'
+    | '/login'
+    | '/signup'
+    | '/coderush/guess_output/$seed';
   fileRoutesByTo: FileRoutesByTo;
-  to: '/' | '/profile' | '/coderush' | '/home' | '/login' | '/signup';
+  to:
+    | '/'
+    | '/profile'
+    | '/coderush'
+    | '/home'
+    | '/login'
+    | '/signup'
+    | '/coderush/guess_output/$seed';
   id:
     | '__root__'
     | '/'
@@ -87,13 +115,14 @@ export interface FileRouteTypes {
     | '/coderush'
     | '/home'
     | '/login'
-    | '/signup';
+    | '/signup'
+    | '/coderush/guess_output/$seed';
   fileRoutesById: FileRoutesById;
 }
 export interface RootRouteChildren {
   IndexLazyRoute: typeof IndexLazyRoute;
   ProfileRoute: typeof ProfileRoute;
-  CoderushLazyRoute: typeof CoderushLazyRoute;
+  CoderushLazyRoute: typeof CoderushLazyRouteWithChildren;
   HomeLazyRoute: typeof HomeLazyRoute;
   LoginLazyRoute: typeof LoginLazyRoute;
   SignupLazyRoute: typeof SignupLazyRoute;
@@ -143,13 +172,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexLazyRouteImport;
       parentRoute: typeof rootRouteImport;
     };
+    '/coderush/guess_output/$seed': {
+      id: '/coderush/guess_output/$seed';
+      path: '/guess_output/$seed';
+      fullPath: '/coderush/guess_output/$seed';
+      preLoaderRoute: typeof CoderushGuess_outputSeedLazyRouteImport;
+      parentRoute: typeof CoderushLazyRoute;
+    };
   }
 }
+
+interface CoderushLazyRouteChildren {
+  CoderushGuess_outputSeedLazyRoute: typeof CoderushGuess_outputSeedLazyRoute;
+}
+
+const CoderushLazyRouteChildren: CoderushLazyRouteChildren = {
+  CoderushGuess_outputSeedLazyRoute: CoderushGuess_outputSeedLazyRoute,
+};
+
+const CoderushLazyRouteWithChildren = CoderushLazyRoute._addFileChildren(
+  CoderushLazyRouteChildren
+);
 
 const rootRouteChildren: RootRouteChildren = {
   IndexLazyRoute: IndexLazyRoute,
   ProfileRoute: ProfileRoute,
-  CoderushLazyRoute: CoderushLazyRoute,
+  CoderushLazyRoute: CoderushLazyRouteWithChildren,
   HomeLazyRoute: HomeLazyRoute,
   LoginLazyRoute: LoginLazyRoute,
   SignupLazyRoute: SignupLazyRoute,

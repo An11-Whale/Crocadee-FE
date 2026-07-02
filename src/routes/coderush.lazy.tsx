@@ -1,8 +1,30 @@
-import { createLazyFileRoute } from '@tanstack/react-router';
+import {
+  createLazyFileRoute,
+  Outlet,
+  useRouterState,
+} from '@tanstack/react-router';
 import { MiniGameCarousel } from '../components/coderush/MiniGameCarousel';
 
 export const Route = createLazyFileRoute('/coderush')({
-  component: () => (
+  component: CoderushRoute,
+});
+
+function CoderushRoute() {
+  const { location } = useRouterState();
+  const isOnChildRoute = location.pathname !== '/coderush';
+
+  // When a child route is active (e.g. /coderush/guess_output/<seed>),
+  // render only the child through Outlet, not the carousel.
+  // Use min-h-0 flex-1 to fill remaining space after the navbar in __root
+  if (isOnChildRoute) {
+    return (
+      <div className="flex min-h-0 flex-1 flex-col bg-[#F9F9FF] text-neutral-900">
+        <Outlet />
+      </div>
+    );
+  }
+
+  return (
     <main className="flex h-dvh flex-col overflow-hidden bg-[#F9F9FF] text-neutral-900">
       <section className="mx-auto flex min-h-0 w-full max-w-275 flex-1 flex-col px-4 py-2.5 sm:px-6 sm:py-3">
         <div className="shrink-0">
@@ -18,5 +40,5 @@ export const Route = createLazyFileRoute('/coderush')({
         <MiniGameCarousel />
       </section>
     </main>
-  ),
-});
+  );
+}

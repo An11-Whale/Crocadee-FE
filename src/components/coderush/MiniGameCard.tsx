@@ -1,3 +1,4 @@
+import { useNavigate } from '@tanstack/react-router';
 import codeCopyIconUrl from '../../assets/icons/coderush-code-copy.svg';
 // import coinIconUrl from '../../assets/icons/coderush-reward-coin.svg';
 import xpIconUrl from '../../assets/icons/coderush-reward-xp.svg';
@@ -5,6 +6,7 @@ import type {
   MiniGame,
   MiniGameTemplate,
 } from '../../features/coderush/data/miniGames';
+import { generateGuessOutputSeed } from '../../features/coderush/guess-output/guessOutputData';
 import { Button } from '../ui/Button';
 
 interface MiniGameCardProps {
@@ -61,6 +63,7 @@ function RewardItem({ iconUrl, label, textColor }: RewardItemProps) {
 }
 
 export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
+  const navigate = useNavigate();
   const hasFragmentOptions =
     game.id === 'rearrange-code' && (game.fragmentOptions?.length ?? 0) > 0;
   const hasChoiceOptions =
@@ -270,7 +273,20 @@ export function MiniGameCard({ game, isFeatured = false }: MiniGameCardProps) {
             /> */}
           </div>
 
-          <Button variant="primary">{game.ctaLabel}</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              if (game.id === 'guess-output') {
+                const seed = generateGuessOutputSeed();
+                void navigate({
+                  to: '/coderush/guess_output/$seed',
+                  params: { seed },
+                });
+              }
+            }}
+          >
+            {game.ctaLabel}
+          </Button>
         </div>
       </div>
     </article>

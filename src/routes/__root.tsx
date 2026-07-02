@@ -34,7 +34,7 @@ function RootComponent() {
   }
 
   return (
-    <div className="min-h-screen bg-primary-100 text-neutral-900">
+    <div className="flex h-dvh flex-col bg-primary-100 text-neutral-900">
       {shouldShowNavbar && (
         <TopNavbar
           activeItem={
@@ -49,7 +49,7 @@ function RootComponent() {
         />
       )}
 
-      <main>
+      <main className="flex min-h-0 flex-1 flex-col">
         <Outlet />
       </main>
     </div>
